@@ -1,0 +1,249 @@
+{
+    Tools = ordered() {
+        WRENInnerGlow = MacroOperator {
+            Inputs = ordered() {
+                MainInput1 = InstanceInput { SourceOp = "AlphaDomain", Source = "Input", },
+                Brightness = InstanceInput {
+                    SourceOp = "AlphaDomain", Source = "Brightness",
+                    Name = "亮度", Page = "Controls", Default = 1.8,
+                },
+                Radius = InstanceInput {
+                    SourceOp = "AlphaDomain", Source = "Radius",
+                    Name = "发光半径", Page = "Controls", Default = 16,
+                },
+                Fill = InstanceInput {
+                    SourceOp = "AlphaDomain", Source = "Fill",
+                    Name = "内部填色", Page = "Controls", Default = 1,
+                },
+                Core = InstanceInput {
+                    SourceOp = "AlphaDomain", Source = "Core",
+                    Name = "内芯层次", Page = "Controls", Default = 0.8,
+                },
+                Detail = InstanceInput {
+                    SourceOp = "AlphaDomain", Source = "Detail",
+                    Name = "纹理保留", Page = "Controls", Default = 0.08,
+                },
+                HaloEnabled = InstanceInput {
+                    SourceOp = "AlphaDomain", Source = "HaloEnabled",
+                    Name = "启用外溢柔光", Page = "Controls", Default = 1,
+                },
+                Halo = InstanceInput {
+                    SourceOp = "AlphaDomain", Source = "Halo",
+                    Name = "外溢柔光", Page = "Controls", Default = 1.5,
+                },
+                HaloRadius = InstanceInput {
+                    SourceOp = "AlphaDomain", Source = "HaloRadius",
+                    Name = "外溢范围", Page = "Controls", Default = 65,
+                },
+                UseCustomHaloColor = InstanceInput {
+                    SourceOp = "AlphaDomain", Source = "UseCustomHaloColor",
+                    Name = "使用独立外溢色", Page = "Controls", Default = 0,
+                },
+                ColorRed = InstanceInput {
+                    SourceOp = "GlowColor", Source = "TopLeftRed",
+                    Name = "主体颜色", Page = "Controls", ControlGroup = 1, Default = 1,
+                },
+                ColorGreen = InstanceInput {
+                    SourceOp = "GlowColor", Source = "TopLeftGreen",
+                    Page = "Controls", ControlGroup = 1, Default = 0.82,
+                },
+                ColorBlue = InstanceInput {
+                    SourceOp = "GlowColor", Source = "TopLeftBlue",
+                    Page = "Controls", ControlGroup = 1, Default = 0.6,
+                },
+                HaloColorRed = InstanceInput {
+                    SourceOp = "HaloColor", Source = "TopLeftRed",
+                    Name = "外溢自定义色", Page = "Controls", ControlGroup = 2, Default = 1,
+                },
+                HaloColorGreen = InstanceInput {
+                    SourceOp = "HaloColor", Source = "TopLeftGreen",
+                    Page = "Controls", ControlGroup = 2, Default = 0.58,
+                },
+                HaloColorBlue = InstanceInput {
+                    SourceOp = "HaloColor", Source = "TopLeftBlue",
+                    Page = "Controls", ControlGroup = 2, Default = 0.2,
+                },
+            },
+            Outputs = {
+                MainOutput1 = InstanceOutput { SourceOp = "HaloComposite", Source = "Output", },
+            },
+            ViewInfo = GroupInfo { Pos = { 0, 0 } },
+            Tools = ordered() {
+                AlphaDomain = SetDomain {
+                    Inputs = {
+                        Mode = Input { Value = FuID { "Set" }, },
+                        Left = Input { Value = 0, },
+                        Bottom = Input { Value = 0, },
+                        Right = Input { Value = 1, },
+                        Top = Input { Value = 1, },
+                        Brightness = Input { Value = 1.8, },
+                        Radius = Input { Value = 16, },
+                        Fill = Input { Value = 1, },
+                        Core = Input { Value = 0.8, },
+                        Detail = Input { Value = 0.08, },
+                        HaloEnabled = Input { Value = 1, },
+                        Halo = Input { Value = 1.5, },
+                        HaloRadius = Input { Value = 65, },
+                        UseCustomHaloColor = Input { Value = 0, },
+                    },
+                    UserControls = ordered() {
+                        HaloEnabled = {
+                            LINKS_Name = "启用外溢柔光", LINKID_DataType = "Number",
+                            INPID_InputControl = "CheckboxControl", INP_Integer = true,
+                            ICS_ControlPage = "Controls", INP_Default = 1,
+                        },
+                        Halo = {
+                            LINKS_Name = "外溢柔光", LINKID_DataType = "Number",
+                            INPID_InputControl = "SliderControl", ICS_ControlPage = "Controls",
+                            INP_Default = 1.5, INP_MinScale = 0, INP_MaxScale = 5,
+                            INP_MinAllowed = 0, INP_MaxAllowed = 5,
+                        },
+                        HaloRadius = {
+                            LINKS_Name = "外溢范围", LINKID_DataType = "Number",
+                            INPID_InputControl = "SliderControl", ICS_ControlPage = "Controls",
+                            INP_Default = 65, INP_MinScale = 0, INP_MaxScale = 500,
+                            INP_MinAllowed = 0, INP_MaxAllowed = 1000,
+                        },
+                        UseCustomHaloColor = {
+                            LINKS_Name = "使用独立外溢色", LINKID_DataType = "Number",
+                            INPID_InputControl = "CheckboxControl", INP_Integer = true,
+                            ICS_ControlPage = "Controls", INP_Default = 0,
+                        },
+                        Fill = {
+                            LINKS_Name = "内部填色", LINKID_DataType = "Number",
+                            INPID_InputControl = "SliderControl", ICS_ControlPage = "Controls",
+                            INP_Default = 1, INP_MinScale = 0, INP_MaxScale = 1,
+                            INP_MinAllowed = 0, INP_MaxAllowed = 1,
+                        },
+                        Core = {
+                            LINKS_Name = "内芯层次", LINKID_DataType = "Number",
+                            INPID_InputControl = "SliderControl", ICS_ControlPage = "Controls",
+                            INP_Default = 0.8, INP_MinScale = 0, INP_MaxScale = 1,
+                            INP_MinAllowed = 0, INP_MaxAllowed = 1,
+                        },
+                        Detail = {
+                            LINKS_Name = "纹理保留", LINKID_DataType = "Number",
+                            INPID_InputControl = "SliderControl", ICS_ControlPage = "Controls",
+                            INP_Default = 0.08, INP_MinScale = 0, INP_MaxScale = 1,
+                            INP_MinAllowed = 0, INP_MaxAllowed = 1,
+                        },
+
+                        Brightness = {
+                            LINKS_Name = "亮度", LINKID_DataType = "Number",
+                            INPID_InputControl = "SliderControl", ICS_ControlPage = "Controls",
+                            INP_Default = 1.8, INP_MinScale = 0, INP_MaxScale = 5,
+                            INP_MinAllowed = 0, INP_MaxAllowed = 100,
+                        },
+                        Radius = {
+                            LINKS_Name = "发光半径", LINKID_DataType = "Number",
+                            INPID_InputControl = "SliderControl", ICS_ControlPage = "Controls",
+                            INP_Default = 16, INP_MinScale = 0, INP_MaxScale = 100,
+                            INP_MinAllowed = 0, INP_MaxAllowed = 500,
+                        },
+                    },
+                    ViewInfo = OperatorInfo { Pos = { 0, 0 } },
+                },
+                InvertMatte = Custom {
+                    Inputs = {
+                        Image1 = Input { SourceOp = "AlphaDomain", Source = "Output", },
+                        RedExpression = Input { Value = "1-min(max(a1,0),1)", },
+                        GreenExpression = Input { Value = "1-min(max(a1,0),1)", },
+                        BlueExpression = Input { Value = "1-min(max(a1,0),1)", },
+                        AlphaExpression = Input { Value = "1", },
+                    },
+                    ViewInfo = OperatorInfo { Pos = { 110, -60 } },
+                },
+                InwardBlur = Blur {
+                    Inputs = {
+                        Input = Input { SourceOp = "InvertMatte", Source = "Output", },
+                        Filter = Input { Value = FuID { "Gaussian" }, },
+                        XBlurSize = Input { Value = 16, Expression = "AlphaDomain.Radius", },
+                        LockXY = Input { Value = 1, },
+                        Alpha = Input { Value = 0, },
+                        ClippingMode = Input { Value = FuID { "Frame" }, },
+                    },
+                    ViewInfo = OperatorInfo { Pos = { 220, -60 } },
+                },
+                GlowColor = Background {
+                    Inputs = {
+                        UseFrameFormatSettings = Input { Value = 1, },
+                        TopLeftRed = Input { Value = 1, },
+                        TopLeftGreen = Input { Value = 0.82, },
+                        TopLeftBlue = Input { Value = 0.6, },
+                        TopLeftAlpha = Input { Value = 1, },
+                    },
+                    ViewInfo = OperatorInfo { Pos = { 220, -120 } },
+                },
+                HaloColor = Background {
+                    Inputs = {
+                        UseFrameFormatSettings = Input { Value = 1, },
+                        TopLeftRed = Input { Value = 1, },
+                        TopLeftGreen = Input { Value = 0.58, },
+                        TopLeftBlue = Input { Value = 0.2, },
+                        TopLeftAlpha = Input { Value = 1, },
+                    },
+                    ViewInfo = OperatorInfo { Pos = { 220, -180 } },
+                },
+                InnerComposite = Custom {
+                    Inputs = {
+                        Image1 = Input { SourceOp = "AlphaDomain", Source = "Output", },
+                        Image2 = Input { SourceOp = "InwardBlur", Source = "Output", },
+                        NumberIn1 = Input { Value = 1.8, Expression = "AlphaDomain.Brightness", },
+                        NumberIn2 = Input { Value = 1, Expression = "GlowColor.TopLeftRed", },
+                        NumberIn3 = Input { Value = 0.82, Expression = "GlowColor.TopLeftGreen", },
+                        NumberIn4 = Input { Value = 0.6, Expression = "GlowColor.TopLeftBlue", },
+                        NumberIn5 = Input { Value = 16, Expression = "AlphaDomain.Radius", },
+                        NumberIn6 = Input { Value = 1, Expression = "AlphaDomain.Fill", },
+                        NumberIn7 = Input { Value = 0.8, Expression = "AlphaDomain.Core", },
+                        NumberIn8 = Input { Value = 0.08, Expression = "AlphaDomain.Detail", },
+                        Intermediate1 = Input { Value = "min(max(a1,0),1)", },
+                        Intermediate2 = Input { Value = "if(n5>0,min(max(1-2*r2,0),1),1)", },
+                        Intermediate3 = Input { Value = "1-n8+n8*min(max((r1*0.2126+g1*0.7152+b1*0.0722)/max(i1,0.000001),0),1)", },
+                        Intermediate4 = Input { Value = "if(abs(n2-n3)+abs(n3-n4)<0.000001,0,i2*n7)", },
+                        Intermediate5 = Input { Value = "max(n1,0)*n6", },
+                        Intermediate6 = Input { Value = "1-min(i5,1)", },
+                        Intermediate7 = Input { Value = "if(n5>0,min(max(a1+r2-1,0)*2,i1)*max(n1,0)*(1-n6),0)", },
+                        Intermediate8 = Input { Value = "min(n2,min(n3,n4))/max(max(n2,max(n3,n4)),0.000001)", },
+                        RedExpression = Input { Value = "r1*i6+i1*i3*i5*n2*(1-0.65*i4*(0.2+0.8*i8*i8*i8*i8))+n2*i7", },
+                        GreenExpression = Input { Value = "g1*i6+i1*i3*i5*n3*(1-0.65*i4*(0.2+0.8*i8*i8*i8*i8))+n3*i7", },
+                        BlueExpression = Input { Value = "b1*i6+i1*i3*i5*n4*(1-0.65*i4*(0.2+0.8*i8*i8*i8*i8))+n4*i7", },
+                        AlphaExpression = Input { Value = "a1", },
+                    },
+                    ViewInfo = OperatorInfo { Pos = { 330, 0 } },
+                },
+                HaloBlur = Blur {
+                    Inputs = {
+                        Input = Input { SourceOp = "InnerComposite", Source = "Output", },
+                        Filter = Input { Value = FuID { "Gaussian" }, },
+                        XBlurSize = Input { Value = 65, Expression = "AlphaDomain.HaloRadius", },
+                        LockXY = Input { Value = 1, },
+                        Alpha = Input { Value = 1, },
+                        ClippingMode = Input { Value = FuID { "Frame" }, },
+                    },
+                    ViewInfo = OperatorInfo { Pos = { 440, -60 } },
+                },
+                HaloComposite = Custom {
+                    Inputs = {
+                        Image1 = Input { SourceOp = "InnerComposite", Source = "Output", },
+                        Image2 = Input { SourceOp = "HaloBlur", Source = "Output", },
+                        NumberIn1 = Input { Value = 1.5, Expression = "AlphaDomain.Halo", },
+                        NumberIn2 = Input { Value = 1.8, Expression = "AlphaDomain.Brightness", },
+                        NumberIn3 = Input { Value = 65, Expression = "AlphaDomain.HaloRadius", },
+                        NumberIn4 = Input { Value = 1, Expression = "GlowColor.TopLeftRed*(1-AlphaDomain.UseCustomHaloColor)+HaloColor.TopLeftRed*AlphaDomain.UseCustomHaloColor", },
+                        NumberIn5 = Input { Value = 0.58, Expression = "GlowColor.TopLeftGreen*(1-AlphaDomain.UseCustomHaloColor)+HaloColor.TopLeftGreen*AlphaDomain.UseCustomHaloColor", },
+                        NumberIn6 = Input { Value = 0.2, Expression = "GlowColor.TopLeftBlue*(1-AlphaDomain.UseCustomHaloColor)+HaloColor.TopLeftBlue*AlphaDomain.UseCustomHaloColor", },
+                        NumberIn7 = Input { Value = 1, Expression = "AlphaDomain.HaloEnabled", },
+                        Intermediate1 = Input { Value = "if(n3>0,n1*min(max(n2,0),1)*n7,0)", },
+                        Intermediate2 = Input { Value = "1-min(max(a1,0),1)", },
+                        RedExpression = Input { Value = "r1+n4*a2*i1*i2", },
+                        GreenExpression = Input { Value = "g1+n5*a2*i1*i2", },
+                        BlueExpression = Input { Value = "b1+n6*a2*i1*i2", },
+                        AlphaExpression = Input { Value = "a1+min(max(a2*i1,0),1)*i2", },
+                    },
+                    ViewInfo = OperatorInfo { Pos = { 550, 0 } },
+                },
+            },
+        },
+    },
+    ActiveTool = "WRENInnerGlow",
+}
